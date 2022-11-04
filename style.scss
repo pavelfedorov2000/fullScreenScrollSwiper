@@ -1,0 +1,94 @@
+* {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    font-style: normal;
+    font-weight: 400;
+    color: #181818;
+    overflow-x: hidden;
+}
+
+@import './libs/swiper.scss';
+
+.page-slider {
+    @media (min-width: 1025px) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-wrapper {
+        @media (max-width: 1024px) {
+            display: block;
+            height: auto;
+            transform: none !important;
+        }
+    }
+}
+
+.section {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @media (max-width: 1024px) {
+        min-height: 100vh;
+    }
+
+    @media (min-width: 1025px) {
+        height: 100vh;
+    }
+}
+
+.nav-btns {
+    display: none;
+
+    @media (min-width: 1025px) {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        z-index: 100;
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 15px;
+    }
+}
+
+.nav-btn {
+    cursor: pointer;
+    background-color: #29b8ce;
+    color: #fff;
+    text-align: center;
+    border: none;
+    outline: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    line-height: 150%;
+    writing-mode: vertical-lr;
+    transition: 0.3s opacity;
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    &[disabled] {
+        background-color: gray;
+    }
+}
