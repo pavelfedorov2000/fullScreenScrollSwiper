@@ -42,7 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     watchOverflow: true,
                     init: false,
                     allowTouchMove: false,
-                    parallax: true,
 
                     // Navigation arrows
                     /* navigation: {
@@ -101,14 +100,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
             this.enableNextBtn();
 
-            if (currentSlide === 1) {
-                this.disablePrevBtn();
-            }
-
             if (currentSlide !== 0) {
                 currentSlide -= 1;
                 this.currentSlide = currentSlide;
                 this.slideTo(currentSlide);
+            } else {
+                this.disablePrevBtn();
             }
         }
 
@@ -117,14 +114,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
             this.enablePrevBtn();
 
-            if (currentSlide === lastSlideIndex - 1) {
-                this.disableNextBtn();
-            }
-
             if (currentSlide !== lastSlideIndex) {
                 currentSlide += 1;
                 this.currentSlide = currentSlide;
                 this.slideTo(currentSlide);
+            } else {
+                this.disableNextBtn();
             }
         }
     }
