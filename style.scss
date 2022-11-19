@@ -26,9 +26,9 @@ body {
         position: fixed;
         top: 0;
         left: 0;
-        overflow: hidden;
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
 
     .swiper-wrapper {
@@ -41,16 +41,16 @@ body {
 }
 
 .section {
-    background-position: center;
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-
-    @media (max-width: 1024px) {
-        min-height: 100vh;
-    }
 
     @media (min-width: 1025px) {
         height: 100vh;
+    }
+
+    @media (max-width: 1024px) {
+        min-height: 100vh;
     }
 }
 
@@ -59,9 +59,9 @@ body {
 
     @media (min-width: 1025px) {
         position: fixed;
-        left: 0;
         top: 50%;
-        transform: translateY(-50%) rotate(-90deg);
+        transform: translate(-50%) rotate(-90deg);
+        left: 50px;
         z-index: 100;
         display: flex;
         flex-direction: row-reverse;
@@ -71,15 +71,13 @@ body {
 
 .nav-btn {
     cursor: pointer;
-    background-color: #29b8ce;
-    color: #fff;
-    text-align: center;
     border: none;
     outline: none;
     padding: 15px 30px;
+    background-color: blue;
+    color: #fff;
     font-size: 16px;
-    line-height: 150%;
-    writing-mode: vertical-lr;
+    line-height: 1.5;
     transition: 0.3s opacity;
 
     &:hover {
@@ -88,5 +86,6 @@ body {
 
     &[disabled] {
         background-color: gray;
+        pointer-events: none;
     }
 }

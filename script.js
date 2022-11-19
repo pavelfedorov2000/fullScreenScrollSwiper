@@ -2,31 +2,33 @@
 
 window.addEventListener('DOMContentLoaded', () => {
     let pageSlider;
-    const pageSlides = document.querySelectorAll('.section');
-    const lastSlideIndex = pageSlides.length - 1;
-    const prevBtn = document.querySelector('.nav-btn[data-direction="prev"]');
-    const nextBtn = document.querySelector('.nav-btn[data-direction="next"]');
-    let isPageSliderInitialized = document.querySelector(".page-slider").classList.contains("swiper-initialized");
-    let isPc = window.innerWidth > 1024;
-    let isTablet = window.innerWidth <= 1024;
-    const pageSliderSpeed = 800;
+    let isPageSliderInitialized = document.querySelector('.page-slider').classList.contains('swiper-initialized');
+    let isPc = window.innerWidth >= 1025;
+    let isTablet = window.innerWidth < 1024;
+    const prevBtn = document.querySelector('.nav-btn--prev');
+    const nextBtn = document.querySelector('.nav-btn--next');
 
     class PageSlider {
-        constructor(isPageSliderInitialized, isPc, isTablet, pageSliderSpeed) {
-            this.isPageSliderInitialized = isPageSliderInitialized;
+        constructor(pageSlider, isPc, isTablet, pageSlides, speed) {
+            this.pageSlider = pageSlider;
             this.isPc = isPc;
             this.isTablet = isTablet;
+            this.pageSlides = pageSlides;
+            this.speed = speed;
             this.currentSlide = 0;
-            this.speed = pageSliderSpeed;
+            this.lastSlideIndex = this.pageSlides.length - 1;
         }
 
         init() {
+            let isPc = this.isPc;
+            let isTablet = this.isTablet;
+
             if (isPc && !isPageSliderInitialized) {
                 pageSlider = new Swiper(".page-slider", {
                     direction: "vertical",
                     spaceBetween: 0,
                     slidesPerView: "auto",
-                    speed: this.speed,
+                    speed: 800,
 
 
                     keyboard: {
@@ -51,7 +53,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     on: {
                         slideChange: (swiper) => {
-                            const currentSlide = swiper.realIndex;
+                            let currentSlide = swiper.realIndex;
+                            let lastSlideIndex = this.lastSlideIndex;
+
                             this.currentSlide = currentSlide;
 
                             if (currentSlide === 0) {
@@ -111,6 +115,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         nextSlide() {
             let currentSlide = this.currentSlide;
+            let lastSlideIndex = this.lastSlideIndex;
 
             this.enablePrevBtn();
 
@@ -124,14 +129,18 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const pageSliderInstance = new PageSlider(isPageSliderInitialized, isPc, isTablet, pageSliderSpeed);
+    const pageSliderInstance = new PageSlider(pageSlider, isPc, isTablet, document.querySelectorAll('.section'), 800);
     pageSliderInstance.init();
 
-    prevBtn.addEventListener('click', () => pageSliderInstance.prevSlide());
+    prevBtn.addEventListener('click', () => {
+        pageSliderInstance.prevSlide();
+    });
 
-    nextBtn.addEventListener('click', () => pageSliderInstance.nextSlide());
+    nextBtn.addEventListener('click', () => {
+        pageSliderInstance.nextSlide();
+    });
 
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', () => {
         pageSliderInstance.init();
     });
 });
